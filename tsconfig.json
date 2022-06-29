@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "declaration": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "strictFunctionTypes": false,
+    "esModuleInterop": true,
+    "lib": ["dom", "es2019"],
+    "inlineSourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "outDir": "./build",
+    "rootDir": "./src"
+  },
+  "exclude": ["lib", "node_modules", "test", "typings"],
+  "include": ["src/**/*"]
+}

@@ -1,0 +1,18 @@
+const path = require('path');
+const fs = require('fs');
+const config = require('./build/config.js').default;
+
+console.log(config);
+let dbConfig = {};
+['development', 'test', 'production'].forEach((env) => {
+  dbConfig[env] = {
+    dialect: 'sqlite',
+    storage: path.join(config.databasePath, 'database.sqlite'),
+  };
+});
+fs.writeFileSync('sequelize-config.json', JSON.stringify(dbConfig, null, 2));
+
+module.exports = {
+  config: path.resolve('sequelize-config.json'),
+  'migrations-path': path.resolve('migrations'),
+};

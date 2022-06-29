@@ -1,0 +1,14 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "/Users/sudharsanselvaraj/.cache/android-app-profiling/database.sqlite"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "/Users/sudharsanselvaraj/.cache/android-app-profiling/database.sqlite"
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "/Users/sudharsanselvaraj/.cache/android-app-profiling/database.sqlite"
+  }
+}
