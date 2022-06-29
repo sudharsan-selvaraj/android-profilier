@@ -4,6 +4,9 @@ import { Session } from "../../../interfaces/entities/session";
 export const getSessionsList = (state: AppState) =>
   state.entities.sessions.items;
 
+export const isSessionsLoaded = (state: AppState) =>
+  state.entities.sessions.isInitialized;
+
 export const getSessionsByUUID = (sessionUUID: string) => {
   return (state: AppState) =>
     state.entities.sessions.items.find((s: Session) => s.uuid == sessionUUID);

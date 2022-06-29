@@ -33,8 +33,27 @@ class SocketController {
         uuid: sessionId,
       },
     });
-    if (!SocketController.sessionMap.has(sessionId)) {
-      if (session && !session.completed) {
+
+    const logs = await Profiling.findAll({
+      where: {
+        session_id: session?.id,
+      },
+    });
+
+    if (!session) {
+      return invokeCallback({
+        success: false,
+        message: 'Session not found',
+      });
+    }
+    if (session?.completed) {
+      this.socket.join(sessionId);
+      invokeCallback(callback, {
+        alreadyStarted: true,
+        logs: logs,
+      });
+    } else {
+      if (!SocketController.sessionMap.has(sessionId)) {
         const sessionManager = new SessionManager(
           session,
           session.device_udid,
@@ -44,18 +63,14 @@ class SocketController {
         await sessionManager.startLogging();
         this.socket.join(sessionId);
         invokeCallback(callback, { success: true });
+        console.log('Session not founf.. so adding new');
+      } else {
+        this.socket.join(sessionId);
+        invokeCallback(callback, {
+          alreadyStarted: true,
+          logs: logs,
+        });
       }
-    } else {
-      const logs = await Profiling.findAll({
-        where: {
-          session_id: session?.id,
-        },
-      });
-      this.socket.join(sessionId);
-      invokeCallback(callback, {
-        alreadyStarted: true,
-        logs: logs,
-      });
     }
   }
 

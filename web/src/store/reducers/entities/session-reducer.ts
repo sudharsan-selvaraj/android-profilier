@@ -4,6 +4,7 @@ import ReduxActionTypes from "../../redux-action-types";
 
 export type SessionEntityType = {
   items: [];
+  isInitialized: boolean;
   isLoading: boolean;
   isUpdating: boolean;
   isSuccess: boolean;
@@ -11,6 +12,7 @@ export type SessionEntityType = {
 
 const initialState: SessionEntityType = {
   items: [],
+  isInitialized: false,
   isLoading: false,
   isUpdating: false,
   isSuccess: true,
@@ -29,6 +31,7 @@ export default createReducer(initialState, {
     ...state,
     items: action.payload.data,
     isLoading: false,
+    isInitialized: true,
   }),
   [ReduxActionTypes.CREATE_SESSION]: (state: any) => ({
     ...state,

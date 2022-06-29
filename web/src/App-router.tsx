@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Switch, Route, Redirect, HashRouter } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import ViewHolder from "./components/layouts/view-holder";
@@ -17,6 +17,7 @@ import { socket } from "./socket/client";
 import { fetchDevicesSuccess } from "./store/actions/device-actions";
 import Devices from "./components/pages/devices";
 import SessionProfiler from "./components/pages/session-profilier";
+import { fetchSessionList } from "./store/actions/session-actions";
 
 const Container = styled.div`
   display: flex;
@@ -46,9 +47,9 @@ function AppRouter(props: PropsType) {
       console.log("Connected");
     });
     socket.on("devices", (data) => {
-      console.log(data);
       dispatch(fetchDevicesSuccess(data.devices));
     });
+
     dispatch({
       type: ReduxActionTypes.INIT_APP,
     });
